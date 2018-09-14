@@ -1,15 +1,17 @@
 # Projet Entretien Uppler #
 
-## A quoi sert ce projet ##
+## Description ##
 
 Ce projet a été réalisé à l'issu de l'entretien d'embauche de l'entreprise Uppler.
+
+Réalisé par Allan DEMARBRE.
 
 ## Comment installer le projet ##
 
 Pour l'installer, clonez dans un premier temps le projet : 
 
 ``
-git@github.com:demarbre1u/Projet_Entretien_Uppler.git
+git clone git@github.com:demarbre1u/Projet_Entretien_Uppler.git
 ``
 
 Une fois cloné, il est nécessaire d'installer les dépendances requises : 
