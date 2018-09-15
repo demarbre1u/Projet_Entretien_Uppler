@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Entity\Comment;
 
 class DefaultController extends Controller
 {
@@ -24,6 +25,20 @@ class DefaultController extends Controller
      */
     public function test(Request $request)
     {
-        return $this->render('default/test.html.twig');
+        $comment = new Comment();
+        $comment->setAuthor('Allan');
+        $comment->setText('This is my first comment! Yay!');
+
+        $em = $this->getDoctrine()->getManager();
+
+        // tells Doctrine you want to (eventually) save the Product (no queries yet)
+        $em->persist($comment);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $em->flush();
+
+        return $this->render('default/test.html.twig', [
+            "id" => $comment->getId()
+        ]);
     }
 }
