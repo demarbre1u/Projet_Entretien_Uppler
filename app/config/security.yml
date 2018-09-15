@@ -10,7 +10,7 @@ security:
     providers:
         in_memory:
             memory: ~
-
+                
         db_provider:
             entity:
                 class: AppBundle\Entity\User
@@ -23,6 +23,7 @@ security:
             security: false
 
         main:
+            logout_on_user_change: true
             anonymous: ~
             provider: db_provider
 
@@ -34,4 +35,11 @@ security:
             
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
             #http_basic: ~
+        
+        secured_area:
+            logout_on_user_change: true
             
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
+            
+            provider: db_provider
