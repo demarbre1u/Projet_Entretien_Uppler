@@ -14,7 +14,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
@@ -31,10 +30,8 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        // tells Doctrine you want to (eventually) save the Product (no queries yet)
         $em->persist($comment);
 
-        // actually executes the queries (i.e. the INSERT query)
         $em->flush();
 
         return $this->render('default/test.html.twig', [

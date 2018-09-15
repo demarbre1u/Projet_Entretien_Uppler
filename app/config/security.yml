@@ -32,13 +32,17 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+
+            logout:
+                path: logout
+                target: homepage
             
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
             #http_basic: ~
         
         secured_area:
             logout_on_user_change: true
-            
+
             form_login:
                 csrf_token_generator: security.csrf.token_manager
             
