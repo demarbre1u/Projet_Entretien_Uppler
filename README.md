@@ -32,6 +32,18 @@ Pour que les modifs soient visibles en accédant à l'application servit par Ngi
 
 ``php bin/conole cache:clear --env=prod``
 
+Pour créer la base de données :
+
+``php bin/console doctrine:database:create``
+
+Pour créer les tables :
+
+``php bin/console doctrine:schema:update --force``
+
+Pour supprimer les tablles : 
+
+``php bin/console doctrine:schema:drop --force``
+
 ### Serveur de production ###
 
 TODO (Config Nginx, hostname, etc)
