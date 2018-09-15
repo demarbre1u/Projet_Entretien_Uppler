@@ -27,6 +27,17 @@ class Comment
      */
     private $text;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+    
+    function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->createdAt->setTimezone(new \DateTimeZone('Europe/Paris'));
+    }
+
     function getId() 
     {
         return $this->id;
@@ -55,5 +66,10 @@ class Comment
     function setText(string $text)
     {
         $this->text = $text;
+    }
+
+    function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }
