@@ -86,3 +86,5 @@ server {
 Il faut ensuite ajouter le hostname dans ``/etc/hosts`` : 
 
 ``127.0.0.1   entretien.local``
+
+Enfin, vous pouvez accéder au site via l'URL : http://entretien.local/
