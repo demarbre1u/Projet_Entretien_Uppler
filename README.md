@@ -26,7 +26,7 @@ Le projet est maintenant prêt à être utilisé !
 
 Pour que les modifs soient visibles en accédant à l'application servit par Nginx, il faut clear le cache :
 
-``php bin/conole cache:clear --env=prod``
+``php bin/console cache:clear --env=prod``
 
 Pour créer la base de données :
 
