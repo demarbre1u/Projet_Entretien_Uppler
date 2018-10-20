@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="profile-header" class="alert-info">
+                <h1>
+                    Your profile page
+                    <button id="profile-header-btn" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h1>
+                <span>
+                    Your can see and manage your news here.
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+    $( document ).ready( () => {
+
+        if(getCookie('profile-header') === '')
+            $('#profile-header').show()
+
+        $('#profile-header-btn').on('click', () => {
+            $('#profile-header').slideUp()
+            
+            setCookie('profile-header', 1, 7)
+        })
+
+    })
+
+    function setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+
+        for(var i = 0; i <ca.length; i++) 
+        {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') 
+            {
+                c = c.substring(1);
+            }
+            
+            if (c.indexOf(name) == 0) 
+            {
+                return c.substring(name.length, c.length);
+            }
+        }
+
+        return "";
+    }
+
+</script>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+    #container {
+        margin: auto;
+        margin-top: 20px;
+        width: 600px;
+    }
+
+    #profile-header {
+        display: none;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+</style>
+{% endblock %}

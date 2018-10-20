@@ -12,30 +12,21 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function home(Request $request)
     {
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
-    }
-
-    /**
-     * @Route("/test", name="test")
-     */
-    public function test(Request $request)
-    {
+        /*
+        // Création d'un commentaire
         $comment = new Comment();
         $comment->setAuthor('Allan');
         $comment->setText('This is my first comment! Yay!');
-
+        
         $em = $this->getDoctrine()->getManager();
 
         $em->persist($comment);
 
         $em->flush();
+        */
 
-        return $this->render('default/test.html.twig', [
-            "id" => $comment->getId()
-        ]);
+        return $this->render('default/home.html.twig');
     }
 }
