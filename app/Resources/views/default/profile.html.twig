@@ -17,7 +17,7 @@
 
             <div id="news-container" class="card">
                 <div class="card-body">
-                    {% if news is not defined %}
+                    {% if news.count == 0 %}
                         <h5 class="card-title">Oops !</h5>
                         <p class="card-text">Looks like you didn't create any news yet.</p>
                         <p class="card-text">Now would be a good time to get started, don't you think?</p>
@@ -36,7 +36,7 @@
                                     
                                     <div>
                                         <a href="#" class="btn btn-success"><i class="fas fa-eye"></i></a>
-                                        <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <a href=" {{ path('delete-news', {'id': new.id}) }} " class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </div>
                                 </li>
                             {% endfor %}

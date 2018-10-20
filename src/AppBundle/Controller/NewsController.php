@@ -40,4 +40,34 @@ class NewsController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/news/delete/{id}", name="delete-news")
+     */
+    public function deleteNews(Request $request, $id) 
+    {  
+        // Checks if user is authentified
+        $currentUser = $this->getUser();
+        if(empty($currentUser))
+            return $this->redirectToRoute('homepage');
+
+        $news = $this->getDoctrine()
+            ->getRepository(News::class)
+            ->find($id);
+
+        // Checks if the targeted news is valid
+        if(empty($news))
+            return $this->redirectToRoute('homepage');
+
+        // Checks if current user owns the news
+        if($news->getUser()->getId() !== $currentUser->getId())
+            return $this->redirectToRoute('homepage');
+
+        // Deletes the news
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($news);
+        $em->flush();
+
+        return $this->redirectToRoute('profile');
+    }
 }
