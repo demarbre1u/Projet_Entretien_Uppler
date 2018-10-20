@@ -12,22 +12,16 @@ class ProfileController extends Controller
     /**
      * @Route("/profile", name="profile")
      */
-    public function test(Request $request)
+    public function profile(Request $request)
     {
-        /*
         $currentUser = $this->getUser();
-
-        $news = new News();
-        $news->setAuthor($currentUser->getUsername());
-        $news->setText('This is my first news, leggooo');
-        $news->setUser($currentUser); 
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($news);
-        $entityManager->flush();
-        */
+        if(empty($currentUser))
+            return $this->redirectToRoute('homepage');
         
+        $news = $currentUser->getNews();
+
         return $this->render('default/profile.html.twig', [
+            "news" => $news
         ]);
     }
 }

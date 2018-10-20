@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -44,11 +45,22 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\News", mappedBy="user")
+     */
+    private $news;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->news = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getUsername()
@@ -101,6 +113,16 @@ class User implements UserInterface, \Serializable
     public function getRoles()
     {
         return array('ROLE_USER');
+    }
+
+    public function getNews()
+    {
+        return $this->news;
+    }
+
+    public function setNews($news)
+    {
+        $this->news = $news;
     }
 
     public function eraseCredentials()

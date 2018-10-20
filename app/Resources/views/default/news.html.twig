@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div class="card bg-light" style="margin: auto; margin-top: 20px; width: 600px">
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.text) }}
+
+
+                        <div class="d-flex flex-row-reverse">
+                            <button class="btn btn-outline-primary form-btn" type="submit">Save</button>
+                            <a href=" {{ path('profile') }} " class="btn btn-outline-danger form-btn">Cancel</a>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+    $( document ).ready( () => {
+
+        if(getCookie('profile-header') === '')
+            $('#profile-header').show()
+
+        $('#profile-header-btn').on('click', () => {
+            $('#profile-header').slideUp()
+            
+            setCookie('profile-header', 1, 7)
+        })
+
+    })
+
+    function setCookie(cname, cvalue, exdays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+
+        for(var i = 0; i <ca.length; i++) 
+        {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') 
+            {
+                c = c.substring(1);
+            }
+            
+            if (c.indexOf(name) == 0) 
+            {
+                return c.substring(name.length, c.length);
+            }
+        }
+
+        return "";
+    }
+
+</script>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+    #container {
+        margin: auto;
+        margin-top: 20px;
+        width: 600px;
+    }
+
+    #profile-header {
+        display: none;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    #news-container {
+        margin: auto;
+        margin-top: 20px;
+        width: 600px;
+    }
+
+    .my-textarea {
+        height: 200px;
+    }
+
+    .form-btn {
+        margin-left: 10px;
+    }
+
+
+
+</style>
+{% endblock %}

@@ -14,6 +14,36 @@
                     Your can see and manage your news here.
                 </span>
             </div>
+
+            <div id="news-container" class="card">
+                <div class="card-body">
+                    {% if news is not defined %}
+                        <h5 class="card-title">Oops !</h5>
+                        <p class="card-text">Looks like you didn't create any news yet.</p>
+                        <p class="card-text">Now would be a good time to get started, don't you think?</p>
+                    {% endif %}
+                    
+                    <div class="d-flex flex-row-reverse">
+                        <a href=" {{ path('create-news') }} " class="btn btn-primary">Create a news</a>
+                    </div>
+
+                    {% if news %}
+                        <br/>
+                        <ul class="list-group">
+                            {% for new in news %}
+                                <li class="list-group-item d-flex justify-content-between">
+                                    {{ new.title }}
+                                    
+                                    <div>
+                                        <a href="#" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -72,13 +102,19 @@
     #container {
         margin: auto;
         margin-top: 20px;
-        width: 600px;
+        width: 800px;
     }
 
     #profile-header {
         display: none;
         padding: 15px;
         border-radius: 5px;
+    }
+
+    #news-container {
+        margin: auto;
+        margin-top: 20px;
+        width: 800px;
     }
 
 </style>
