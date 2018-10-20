@@ -80,7 +80,7 @@ class News
 
     function getAuthor() 
     {
-        return $thid->author;
+        return $this->author;
     }
 
     function setAuthor(string $author)
@@ -100,6 +100,6 @@ class News
 
     function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->createdAt->format('Y-m-d H:i:s');
     }
 }

@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use AppBundle\Entity\Comment;
+use AppBundle\Entity\News;
 
 class DefaultController extends Controller
 {
@@ -13,20 +13,23 @@ class DefaultController extends Controller
      * @Route("/", name="homepage")
      */
     public function home(Request $request)
-    {
-        /*
-        // Création d'un commentaire
-        $comment = new Comment();
-        $comment->setAuthor('Allan');
-        $comment->setText('This is my first comment! Yay!');
-        
+    {        
         $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
 
-        $em->persist($comment);
+        $qb->select('n')
+            ->from(News::class, 'n')
+            ->orderBy('n.createdAt', 'DESC')
+            ->setMaxResults(3);
+        $query = $qb->getQuery();
+        $news = $query->getResult();
 
-        $em->flush();
-        */
+        //$news = $em->getRepository(News::class)
+        //    ->findAll();
 
-        return $this->render('default/home.html.twig');
+        return $this->render('default/home.html.twig', [
+            "mostPopular" => empty($news) ? null : $news[0],
+            "news" => $news
+        ]);
     }
 }

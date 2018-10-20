@@ -4,10 +4,78 @@
     <div id="wrapper">
         <div id="container">
             <div id="welcome">
-                <h1>This is a home page !</h1>
+                <h1>The hotest news</h1>
+
+                {% if mostPopular %}
+                    <div id="news-container" class="card news-card">
+                        <div class="card-body news-header-popular">
+                            <h3>{{ mostPopular.title }}<h3> 
+                            <h6 class="news-infos">By <div class="author-name">{{ mostPopular.author }}</div> at {{ mostPopular.createdAt }}</h6>
+                        </div>
+                
+                        <div class="card-body news-body">
+                            <span>{{ mostPopular.text }}</span>
+                        </div>
+                
+                        <span class="card-footer news-footer d-flex justify-content-between">
+                            <p class="comments-nb">0 comments</p>
+                            <a href="#" class="btn btn-outline-dark">Read more</a>
+                        </span>
+                    </div>
+                {% else %}
+                    <p>There is no news available yet. :/</p>                    
+                {% endif %}
+                
+                <br/>
+
+                <h1>Most recent news</h1>
+
+                {% if news is empty %}
+                    <p>There is no news available yet. :/</p>
+                {% else %}
+                    {% for new in news %}
+                        <div class="card news-card">
+                            <div class="card-body news-header">
+                                <h3>{{ new.title }}<h3> 
+                                <h6 class="news-infos">By <div class="author-name">{{ new.author }}</div> at {{ new.createdAt }}</h6>
+                            </div>
+                            
+                            <div class="card-body news-body">
+                                <span>{{ new.text }}</span>
+                            </div>
+                            
+                            <span class="card-footer news-footer d-flex justify-content-between">
+                                <p class="comments-nb">0 comments</p>
+                                <a href="#" class="btn btn-outline-dark">Read more</a>
+                            </span>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+
+$(document).ready( () => {
+    $('.news-body').each( function() {
+        var $p = $(this).children('span');
+        var divh = $(this).height();
+
+        while ($p.outerHeight() > divh) 
+        {
+            $p.text(function (index, text) {
+                return text.replace(/\W*\s(\S)*$/, '...');
+            });
+        }
+    })
+})
+
+</script>
+
 {% endblock %}
 
 {% block stylesheets %}
@@ -16,7 +84,48 @@
     #container {
         margin: auto;
         margin-top: 20px;
-        width: 600px;
+        width: 800px;
+    }
+
+    .news-card {
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .news-header-popular {
+        background-color: #16a085;
+        color: #ecf0f1;
+    }
+    
+    .news-header {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+    }
+
+    .news-header h3, .news-header h6, .news-header-popular h3, .news-header-popular h6 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .news-body {
+        max-height: 120px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .news-infos {
+        color: #bdc3c7;
+    }
+
+    .author-name {
+        display: inline;
+        text-decoration: underline;
+    }
+
+    .comments-nb {
+        padding: 0;
+        margin: 0;
+        padding-top: 8px;
     }
 
 </style>
