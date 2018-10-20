@@ -32,6 +32,10 @@ Pour créer la base de données :
 
 ``php bin/console doctrine:database:create``
 
+Pour détruire la base de données :
+
+``php bin/console doctrine:database:drop --force``
+
 Pour créer les tables :
 
 ``php bin/console doctrine:schema:update --force``
