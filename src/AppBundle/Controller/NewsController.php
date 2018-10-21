@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Form\NewsType;
+use AppBundle\Form\CommentType;
 use AppBundle\Entity\News;
+use AppBundle\Entity\Comment;
 
 class NewsController extends Controller
 {
@@ -70,4 +72,48 @@ class NewsController extends Controller
 
         return $this->redirectToRoute('profile');
     }
+
+    /**
+     * @Route("/news/detail/{id}", name="detail-news")
+     */
+    public function detailNews(Request $request, $id) 
+    {
+        // Get the targeted news
+        $news = $this->getDoctrine()
+            ->getRepository(News::class)
+            ->find($id);
+
+        // Checks if the targeted news is valid
+        if(empty($news))
+            return $this->redirectToRoute('homepage');
+            
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $comment->setNews($news);
+    
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+        }
+
+        // Check if a user is logged in
+        $currentUser = $this->getUser();
+
+        $comments = $news->getComments();
+
+        $data = [
+            "currentUser" => empty($currentUser) ? null : $currentUser->getId(),
+            "news" => $news, 
+            "comments" => $comments,
+            "form" => $form->createView()
+        ];
+
+        // Render shit
+        return $this->render('default/news_detail.html.twig', $data);
+    }
+
 }

@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div class="card bg-light"> 
+                <div class="card-body news-header-popular">
+                    <h3>{{ news.title }}<h3> 
+                    <h6 class="news-infos">By <div class="author-name">{{ news.author }}</div> at {{ news.createdAt }}</h6>    
+                </div>
+                        
+                <div class="card-body news-body">
+                    <span>{{ news.text }}</span>
+                </div>
+                
+                <div class="card-footer news-footer">
+                    {% if comments.count != 0 %}
+
+                        {% for com in comments %}
+                            <div class="card bg-light comment"> 
+                                <div class="card-body">
+                                    <span class="d-flex justify-content-between">
+                                        <div><div class="author-name">{{ com.author }}</div> said</div>
+                                        <div>at {{ com.createdAt }}</div>
+                                    </span>
+                                    <hr/>
+                                    <span>{{ com.text }}</span>                        
+                                </div>
+                            </div>
+                        {% endfor %}
+                        
+                        <hr/>
+                    {% else %}
+                        <span>No comments to show.</span>
+                        <hr/>
+                        <h5>Be the first to comment !</h5>
+                    {% endif %}
+                    
+                    {{ form_start(form) }}
+                        {{ form_row(form.author) }}
+                        {{ form_row(form.text) }}
+
+
+                        <div class="d-flex flex-row-reverse">
+                            <button class="btn btn-outline-primary form-btn" type="submit">Send</button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <br/>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+    #container {
+        margin: auto;
+        margin-top: 20px;
+        width: 800px;
+    }
+
+    .comment {
+        margin: 5px;
+    }
+
+    .news-card {
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .news-header-popular {
+        background-color: #16a085;
+        color: #ecf0f1;
+    }
+    
+    .news-header {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+    }
+
+    .news-header h3, .news-header h6, .news-header-popular h3, .news-header-popular h6 {
+        margin: 0;
+        padding: 0;
+    }
+
+    .news-infos {
+        color: #bdc3c7;
+    }
+
+    .author-name {
+        display: inline;
+        text-decoration: underline;
+    }
+
+    .comments-nb {
+        padding: 0;
+        margin: 0;
+        padding-top: 8px;
+    }
+
+</style>
+{% endblock %}

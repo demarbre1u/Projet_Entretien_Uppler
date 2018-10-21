@@ -31,11 +31,26 @@ class Comment
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\News", inversedBy="comments")
+     */
+    private $news;
     
     function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->createdAt->setTimezone(new \DateTimeZone('Europe/Paris'));
+    }
+
+    function getNews()
+    {
+        return $this->news;
+    }
+
+    function setNews($news)
+    {
+        $this->news = $news;
     }
 
     function getId() 
@@ -50,7 +65,7 @@ class Comment
 
     function getAuthor() 
     {
-        return $thid->author;
+        return $this->author;
     }
 
     function setAuthor(string $author)
@@ -70,6 +85,6 @@ class Comment
 
     function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->createdAt->format('Y-m-d H:i:s');
     }
 }

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -41,11 +42,27 @@ class News
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="news")
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="news")
+     */
+    private $comments;
     
     function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->createdAt->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $this->comments = new ArrayCollection();
+    }
+
+    function getComments()
+    {
+        return $this->comments;
+    }
+
+    function setComments($comments)
+    {
+        $this->comments = $comments;
     }
 
     function getTitle()

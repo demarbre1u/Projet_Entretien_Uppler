@@ -19,7 +19,7 @@
                 
                         <span class="card-footer news-footer d-flex justify-content-between">
                             <p class="comments-nb">0 comments</p>
-                            <a href="#" class="btn btn-outline-dark">Read more</a>
+                            <a href=" {{ path('detail-news', {'id': mostPopular.id}) }} " class="btn btn-outline-dark">Read more</a>
                         </span>
                     </div>
                 {% else %}
@@ -46,7 +46,7 @@
                             
                             <span class="card-footer news-footer d-flex justify-content-between">
                                 <p class="comments-nb">0 comments</p>
-                                <a href="#" class="btn btn-outline-dark">Read more</a>
+                                <a href=" {{ path('detail-news', {'id': new.id}) }} " class="btn btn-outline-dark">Read more</a>
                             </span>
                         </div>
                     {% endfor %}
