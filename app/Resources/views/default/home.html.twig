@@ -18,7 +18,13 @@
                         </div>
                 
                         <span class="card-footer news-footer d-flex justify-content-between">
-                            <p class="comments-nb">0 comments</p>
+                            <p class="comments-nb">
+                                {% if mostPopular.comments.count > 0 %}
+                                    {{ mostPopular.comments.count }} comments
+                                {% else %}
+                                    No comment yet
+                                {% endif %}
+                            </p>
                             <a href=" {{ path('detail-news', {'id': mostPopular.id}) }} " class="btn btn-outline-dark">Read more</a>
                         </span>
                     </div>
@@ -45,7 +51,13 @@
                             </div>
                             
                             <span class="card-footer news-footer d-flex justify-content-between">
-                                <p class="comments-nb">0 comments</p>
+                                <p class="comments-nb">
+                                    {% if new.comments.count > 0 %}
+                                        {{ new.comments.count }} comments
+                                    {% else %}
+                                        No comment yet
+                                    {% endif %}
+                                </p>
                                 <a href=" {{ path('detail-news', {'id': new.id}) }} " class="btn btn-outline-dark">Read more</a>
                             </span>
                         </div>

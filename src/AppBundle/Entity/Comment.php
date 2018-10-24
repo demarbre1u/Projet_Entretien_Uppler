@@ -34,6 +34,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\News", inversedBy="comments")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $news;
 

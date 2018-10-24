@@ -32,7 +32,10 @@
                         <ul class="list-group">
                             {% for new in news %}
                                 <li class="list-group-item d-flex justify-content-between">
-                                    {{ new.title }}
+                                    <div class="d-flex flex-column">
+                                        <span>{{ new.title }}</span>
+                                        <span>{{ new.comments.count }} comments</span>
+                                    </div>
                                     
                                     <div>
                                         <a href=" {{ path('detail-news', {'id': new.id}) }} " class="btn btn-success"><i class="fas fa-eye"></i></a>
