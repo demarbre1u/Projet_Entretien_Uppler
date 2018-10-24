@@ -91,17 +91,20 @@ class NewsController extends Controller
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+         // Check if a user is logged in
+         $currentUser = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $comment->setNews($news);
+
+            if( !empty($currentUser) )
+                $comment->setUser($currentUser);
     
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
         }
-
-        // Check if a user is logged in
-        $currentUser = $this->getUser();
 
         $comments = $news->getComments();
 

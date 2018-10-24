@@ -36,11 +36,26 @@ class Comment
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\News", inversedBy="comments")
      */
     private $news;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="comments")
+     */
+    private $user;
     
     function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->createdAt->setTimezone(new \DateTimeZone('Europe/Paris'));
+    }
+
+    function getUser()
+    {
+        return $this->user;
+    }
+
+    function setUser($user)
+    {
+        $this->user = $user;
     }
 
     function getNews()

@@ -21,7 +21,12 @@
                                 <div class="card-body">
                                     <span class="d-flex justify-content-between">
                                         <div><div class="author-name">{{ com.author }}</div> said</div>
-                                        <div>at {{ com.createdAt }}</div>
+                                        <div>
+                                            at {{ com.createdAt }}
+                                            {% if com.user and com.user.id == currentUser %}
+                                                <a href=" {{ path('delete-comment', {'id': com.id}) }} " class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                            {% endif %}
+                                        </div>
                                     </span>
                                     <hr/>
                                     <span>{{ com.text }}</span>                        
