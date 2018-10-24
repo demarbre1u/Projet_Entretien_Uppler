@@ -31,10 +31,7 @@ class DefaultController extends Controller
         $result = $query->getResult();
 
         if(count($result) > 0)
-        {
             $mostPopular = $em->getRepository(News::class)->find($result[0]['id']);
-            dump($mostPopular);
-        }   
 
         // The 3 most recent news
         $qb->select('n')
@@ -43,9 +40,6 @@ class DefaultController extends Controller
             ->setMaxResults(3);
         $query = $qb->getQuery();
         $news = $query->getResult();
-
-        //$news = $em->getRepository(News::class)
-        //    ->findAll();
 
         return $this->render('default/home.html.twig', [
             "mostPopular" => empty($mostPopular) ? null : $mostPopular,
