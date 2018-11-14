@@ -1,8 +1,10 @@
-# Projet Entretien Uppler #
+# Projet Symfony NewsFeed #
 
 ## Description ##
 
-Ce projet a été réalisé à l'issu de l'entretien d'embauche de l'entreprise Uppler.
+Ce projet a été réalisé à l'issu de l'entretien d'embauche.
+
+Cette application Web permet de créer des actualités, de les consulter, de les gérer et de les commenter.
 
 Réalisé par Allan DEMARBRE.
 
@@ -11,7 +13,7 @@ Réalisé par Allan DEMARBRE.
 Pour l'installer, clonez dans un premier temps le projet : 
 
 ``
-git clone git@github.com:demarbre1u/Projet_Entretien_Uppler.git
+git clone git@github.com:demarbre1u/Projet_Symfony_NewsFeed.git
 ``
 
 Une fois cloné, il est nécessaire d'installer les dépendances requises : 
