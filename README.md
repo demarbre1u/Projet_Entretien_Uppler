@@ -2,7 +2,7 @@
 
 ## Description ##
 
-Ce projet a été réalisé à l'issu de l'entretien d'embauche.
+Ce projet a été réalisé à l'issu d'un entretien d'embauche.
 
 Cette application Web permet de créer des actualités, de les consulter, de les gérer et de les commenter.
 
