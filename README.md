@@ -1,4 +1,4 @@
-# Projet Symfony NewsFeed #
+# Symfony - NewsFeed #
 
 ## Description ##
 
